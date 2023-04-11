@@ -8,8 +8,8 @@ const Logo = () => {
     <Image 
     alt='logo'
     className=''
-    height={50}
-    width={50}
+    height={40}
+    width={40}
     src='/images/logo.png'
     />
     SPACE
