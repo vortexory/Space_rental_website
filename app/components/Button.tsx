@@ -8,7 +8,7 @@ interface ButtonProps {
   disabled: boolean;
   outline?: boolean;
   small?: boolean;
-  Icon: IconType;
+  Icon?: IconType;
 }
 const Button = ({
   label,

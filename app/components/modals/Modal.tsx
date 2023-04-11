@@ -107,14 +107,14 @@ const Modal = ({
                   {secondaryAction && secondaryActionLabel && (
                     <Button
                       disabled={disabled}
-                      Icon={IoMdClose}
+                      // Icon={IoMdClose}
                       label={secondaryActionLabel}
                       onClick={handleSecondaryAction}
                     />
                   )}
                   <Button
                     disabled={disabled}
-                    Icon={IoMdClose}
+                    // Icon={IoMdClose}
                     label={actionLabel}
                     onClick={handleSubmit}
                   />
