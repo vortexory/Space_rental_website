@@ -65,7 +65,7 @@ const Modal = ({
           z-50 
           bg-neutral-800/70 md:flex items-center  "
       >
-        <div className=" relative w-full max-w-2xl mx-auto h-full md:h-auto rounded-lg ">
+        <div className=" relative mx-auto h-full md:h-auto rounded-lg ">
           <div
             className={`translate duration-300 h-full w-full
         ${
