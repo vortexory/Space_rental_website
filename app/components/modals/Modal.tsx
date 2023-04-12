@@ -59,7 +59,7 @@ const Modal = ({
       <div
         className="
           overflow-x-hidden 
-          overflow-y-auto 
+          overflow-y-hidden
           fixed 
           inset-0 
           z-50 
