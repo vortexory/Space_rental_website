@@ -7,6 +7,9 @@ import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../Input/Input';
 import { toast } from 'react-hot-toast';
+import Button from '../Button';
+import { FcGoogle } from 'react-icons/fc';
+import { AiFillGithub } from 'react-icons/ai';
 
 const RegisterModal = () => {
   const { isOpen, onClose } = useRegisterModal();
@@ -75,6 +78,39 @@ const RegisterModal = () => {
     </div>
   );
 
+  const footerContent = (
+    <div className="flex flex-col gap-4 mt-3">
+      <hr />
+      <Button
+        outline
+        label="Continue with Google"
+        Icon={FcGoogle}
+        onClick={() => {}}
+      />
+      <Button
+        outline
+        label="Continue with Github"
+        Icon={AiFillGithub}
+        onClick={() => {}}
+      />
+      <div
+        className="
+          text-neutral-500 text-center  mt-4  font-light
+        "
+      >
+        <p>
+          Already have an account?
+          <span
+            onClick={onClose}
+            className=" text-indigo-800 font-bold  cursor-pointer hover:underline pl-2 "
+          >
+            Log in
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+
   return (
     <Modal
       disabled={isLoading}
@@ -84,6 +120,7 @@ const RegisterModal = () => {
       onClose={onClose}
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
+      footer={footerContent}
     />
   );
 };

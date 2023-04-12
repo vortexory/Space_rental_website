@@ -103,7 +103,7 @@ const Modal = ({
               <div className="relative p-6 flex-auto">{body}</div>
               {/* FOOTER */}
               <div className="flex flex-col gap-2 p-6 ">
-                <div className="flex items-center self-start gap-4 now-full  ">
+                <div className="flex items-center self-start gap-4 no w-full  ">
                   {secondaryAction && secondaryActionLabel && (
                     <Button
                       disabled={disabled}
@@ -113,12 +113,14 @@ const Modal = ({
                     />
                   )}
                   <Button
+                  
                     disabled={disabled}
                     // Icon={IoMdClose}
                     label={actionLabel}
                     onClick={handleSubmit}
                   />
                 </div>
+                {footer}
               </div>
             </div>
           </div>
