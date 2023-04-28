@@ -41,7 +41,7 @@ const RegisterModal = () => {
   };
 
   const bodyContent = (
-    <div className="flex  flex-col gap-4 md:min-w-[30rem] w-full nmax-w-xl mx-auto ">
+    <div className="flex  flex-col gap-4  w-full  ">
       <Heading
         title="Welcome to Space"
         subtitle="Create an account"

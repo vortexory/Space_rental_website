@@ -59,15 +59,15 @@ const Modal = ({
       <div
         className="
           overflow-x-hidden 
-          overflow-y-hidden
+          overflow-y-auto
           fixed 
           inset-0 
           z-50 
-          bg-neutral-800/70 md:flex items-center  "
+          bg-neutral-800/70 md:flexitems-center  "
       >
-        <div className=" relative mx-auto h-full md:h-auto rounded-lg ">
+        <div className=" relative  rounded-lg   ">
           <div
-            className={`translate duration-300 h-full w-full
+            className={`translate duration-300 h-full w-full md:max-w-md mx-auto
         ${
           showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
         }`}
@@ -86,6 +86,7 @@ const Modal = ({
                 relative
                 border-b-[1px]"
               >
+                <div className="text-lg font-semibold">{title}</div>
                 <button
                   onClick={handleClose}
                   className="  p-1
@@ -93,11 +94,11 @@ const Modal = ({
                     hover:opacity-70
                     transition
                     absolute
-                    left-9"
+                    right-9
+                    hover:bg-neutral-200 rounded-full"
                 >
-                  <IoMdClose size={18} />
+                  <IoMdClose size={24} />
                 </button>
-                <div className="text-lg font-semibold">{title}</div>
               </div>
               {/* BODY */}
               <div className="relative p-6 flex-auto">{body}</div>
