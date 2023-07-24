@@ -65,11 +65,11 @@ const Modal = ({
           z-50 
           bg-neutral-800/70 md:flexitems-center  "
       >
-        <div className=" relative  rounded-lg   ">
+        <div className=" relative  rounded-lg h-full flex items-center">
           <div
-            className={`translate duration-300 h-full w-full md:max-w-md mx-auto
+            className={`translate duration-300  w-full md:max-w-md mx-auto
         ${
-          showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+          showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 '
         }`}
           >
             <div
