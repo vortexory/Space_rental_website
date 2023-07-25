@@ -6,13 +6,81 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-
 model User {
-  id String @id @default(cuid())
-  name String 
+  id             String    @id @default(cuid())
+  name           String?
+  email          String    @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  // favoriteIds    String []
+
+  accounts    Account[]
+  Listing     Listing[]
+  Reservation Reservation[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_tokem      String?
+  expires_At        Int?
+  token_type        String
+  scope             String
+  id_token          String?
+  session_state     String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Listing {
+  id            String   @id @default(cuid())
+  title         String
+  description   String
+  imageSrc      String
+  createdAt     DateTime @default(now())
+  category      String
+  roomCount     Int
+  bathroomCount Int
+  guestCount    Int
+  locationValue String
+  price         Int
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  reservations Reservation[]
+
+  @@index([userId])
+}
+
+model Reservation {
+  id         String   @id @default(cuid())
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Int
+  createdAt  DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listingId String
+
+  @@index([userId])
+  @@index([listingId])
 }
