@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full relative flex flex-col gap-1">
       <label
-        className={`     font-semibold
+        className={`     font-semibold text-sm text-slate-700
           ${errors[id] ? 'text-rose-500' : 'text-neutral-800'}
         `}
       >
@@ -42,8 +42,8 @@ const Input: React.FC<InputProps> = ({
           className="
             text-neutral-700
             absolute
-            top-2
-            left-2
+            bottom-2.5
+            left-1
           "
         />
       )}
@@ -66,7 +66,7 @@ const Input: React.FC<InputProps> = ({
           transition
           disabled:opacity-70
           disabled:cursor-not-allowed
-          ${formatPrice ? 'pl-9' : 'pl-4'}
+          ${formatPrice ? 'pl-7' : 'pl-4'}
           ${errors[id] ? 'border-rose-500' : 'border-neutral-300'}
           ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'}
         `}

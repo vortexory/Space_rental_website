@@ -58,32 +58,31 @@ const Modal = ({
     <>
       <div
         className="
-          overflow-x-hidden 
-          overflow-y-auto
+        
+          overflow-x-hidden
+          
           fixed 
           inset-0 
           z-50 
-          bg-neutral-800/70 md:flexitems-center  "
+          bg-neutral-800/70   "
       >
-        <div className=" relative  rounded-lg h-full flex items-center">
+        <div className="   rounded-lg h-full flex items-center mt-20 2xl:mt-0 ">
           <div
-            className={`translate duration-300  w-full md:max-w-md mx-auto
-        ${
+            className={`translate duration-300  w-full md:max-w-md mx-auto         ${
           showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 '
         }`}
           >
             <div
-              className="  translate h-full border-0  rounded-lg 
-              shadow-lg relative flex flex-col w-full    bg-white  "
+              className="  translate border-0  rounded-lg 
+              shadow-lg  flex flex-col w-full    bg-white  "
             >
               {/* HEADER */}
               <div
                 className=" flex 
                 items-center 
-                p-6
-                rounded-t
-                justify-center
-                relative
+                rounded-t    
+                px-6 py-3
+                justify-between
                 border-b-[1px]"
               >
                 <div className="text-lg font-semibold">{title}</div>
@@ -93,8 +92,6 @@ const Modal = ({
                     border-0 
                     hover:opacity-70
                     transition
-                    absolute
-                    right-9
                     hover:bg-neutral-200 rounded-full"
                 >
                   <IoMdClose size={24} />
@@ -103,7 +100,7 @@ const Modal = ({
               {/* BODY */}
               <div className="relative p-6 flex-auto">{body}</div>
               {/* FOOTER */}
-              <div className="flex flex-col gap-2 p-6 ">
+              <div className="flex flex-col gap-2 px-6 pb-6  ">
                 <div className="flex items-center self-start gap-4 no w-full  ">
                   {secondaryAction && secondaryActionLabel && (
                     <Button
