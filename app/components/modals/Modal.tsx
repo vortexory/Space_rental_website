@@ -58,9 +58,8 @@ const Modal = ({
     <>
       <div
         className="
-        
           overflow-x-hidden
-          
+          overflow-y-auto
           fixed 
           inset-0 
           z-50 
@@ -68,9 +67,11 @@ const Modal = ({
       >
         <div className="   rounded-lg h-full flex items-center mt-20 2xl:mt-0 ">
           <div
-            className={`translate duration-300  w-full md:max-w-md mx-auto         ${
-          showModal ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0 '
-        }`}
+            className={`translate duration-300  w-full md:max-w-md mx-auto ${
+              showModal
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-full opacity-0 '
+            }`}
           >
             <div
               className="  translate border-0  rounded-lg 
@@ -111,7 +112,6 @@ const Modal = ({
                     />
                   )}
                   <Button
-                  
                     disabled={disabled}
                     // Icon={IoMdClose}
                     label={actionLabel}
