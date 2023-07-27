@@ -1,6 +1,7 @@
 'use client';
 
-import useRegisterModal from '@/app/hooks/useRegisterModal';
+import { z } from 'zod';
+import useRegisterModal from '@/app/hooks/useRegisterModal.ts';
 import React, { useState } from 'react';
 import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
 import Modal from './Modal';
@@ -10,6 +11,22 @@ import { toast } from 'react-hot-toast';
 import Button from '../Button';
 import { FcGoogle } from 'react-icons/fc';
 import { AiFillGithub } from 'react-icons/ai';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+// Define Zod schema for form validation
+const schema = z.object({
+  name: z.string().nonempty('Name is required.'),
+  email: z
+    .string()
+    .email('Invalid email address.')
+    .nonempty('Email is required.'),
+  password: z
+    .string()
+    .min(6, 'Password must be at least 6 characters long.')
+    .nonempty('Password is required.'),
+});
+
+export type FormValuesType = z.infer<typeof schema>;
 
 const RegisterModal = () => {
   const { isOpen, onClose } = useRegisterModal();
@@ -19,15 +36,11 @@ const RegisterModal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-    },
+  } = useForm<FormValuesType>({
+    resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValuesType> = (data) => {
     //to fix post data to end point
     setIsLoading(true);
 
@@ -42,10 +55,7 @@ const RegisterModal = () => {
 
   const bodyContent = (
     <div className="flex  flex-col gap-4  w-full  ">
-      <Heading
-        title="Welcome to Space"
-        subtitle="Create an account"
-      />
+      <Heading title="Welcome to Space" subtitle="Create an account" />
       <Input
         id="email"
         type="email"
@@ -53,7 +63,6 @@ const RegisterModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
         placeholder="name@space.com"
       />
       <Input
@@ -62,7 +71,6 @@ const RegisterModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
         placeholder="Green Bonnie"
       />
       <Input
@@ -72,7 +80,6 @@ const RegisterModal = () => {
         disabled={isLoading}
         register={register}
         errors={errors}
-        required
         placeholder=""
       />
     </div>
