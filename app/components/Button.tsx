@@ -22,20 +22,12 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`
-      relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg  transition w-full flex  items-center justify-center gap-4   px-6
-             ${
-               outline
-                 ? 'bg-white border-black text-black hover:bg-indigo-50'
-                 : 'bg-indigo-500 border-indigo-500 text-white hover:opacity-80'
-             }
-       ${
-         small
-           ? 'py-1 text-sm font-light border-[1px]'
-           : 'py-3 text-md font-semibold border-2'
-       }
-
-
+      className={`relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg  
+                  transition w-full flex  items-center justify-center gap-4  px-6
+         ${outline ? 'bg-white border-black text-black hover:bg-indigo-50'
+                  : 'bg-indigo-500 border-indigo-500 text-white hover:opacity-80'}
+         ${small? 'py-1 text-sm font-light border-[1px]'
+              : 'py-3 text-md font-semibold border-2'}
 
   `}
     >

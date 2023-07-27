@@ -1,17 +1,20 @@
 'use client';
 
-import { z } from 'zod';
-import useRegisterModal from '@/app/hooks/useRegisterModal.ts';
 import React, { useState } from 'react';
-import { useForm, FieldValues, SubmitHandler } from 'react-hook-form';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
+
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
+import { toast } from 'react-hot-toast';
+import { FcGoogle } from 'react-icons/fc';
+import { AiFillGithub } from 'react-icons/ai';
+
 import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../Input/Input';
-import { toast } from 'react-hot-toast';
 import Button from '../Button';
-import { FcGoogle } from 'react-icons/fc';
-import { AiFillGithub } from 'react-icons/ai';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 // Define Zod schema for form validation
 const schema = z.object({
@@ -44,7 +47,6 @@ const RegisterModal = () => {
     //to fix post data to end point
     setIsLoading(true);
 
-    // alert(JSON.stringify(data));
     toast.success(JSON.stringify(data));
     setTimeout(() => {
       onClose();
