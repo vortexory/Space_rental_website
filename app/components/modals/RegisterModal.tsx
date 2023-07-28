@@ -15,6 +15,7 @@ import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../Input/Input';
 import Button from '../Button';
+import axios from 'axios';
 
 // Define Zod schema for form validation
 const schema = z.object({
@@ -44,15 +45,19 @@ const RegisterModal = () => {
   });
 
   const onSubmit: SubmitHandler<FormValuesType> = (data) => {
-    //to fix post data to end point
+
     setIsLoading(true);
-
-    toast.success(JSON.stringify(data));
-    setTimeout(() => {
+    axios.post('/api/register', data)
+    .then(() => {
+      toast.success('Registered!');
       onClose();
-    }, 3000);
-
-    setIsLoading(false);
+    })
+    .catch((error) => {
+      toast.error(error);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    })
   };
 
   const bodyContent = (

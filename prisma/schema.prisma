@@ -22,9 +22,10 @@ model User {
   updatedAt      DateTime  @updatedAt
   // favoriteIds    String []
 
-  accounts    Account[]
-  Listing     Listing[]
-  Reservation Reservation[]
+  accounts     Account[]
+  listings     Listing[]
+  reservations Reservation[]
+  Favorites    Favorite[]
 }
 
 model Account {
@@ -32,18 +33,27 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_tokem      String?
-  expires_At        Int?
-  token_type        String
-  scope             String
-  id_token          String?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
   session_state     String?
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Favorite {
+  id String @id @default(cuid())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
   @@index([userId])
 }
 
