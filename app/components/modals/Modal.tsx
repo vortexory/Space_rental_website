@@ -59,13 +59,13 @@ const Modal = ({
       <div
         className="
           overflow-x-hidden
-          overflow-y-auto
+          overflow-y-hidden
           fixed 
           inset-0 
           z-50 
           bg-neutral-800/70   "
       >
-        <div className="   rounded-lg h-full flex items-center mt-20 2xl:mt-0 ">
+        <div className="   rounded-lg h-full flex items-center  2xl:mt-0 ">
           <div
             className={`translate duration-300  w-full md:max-w-md mx-auto ${
               showModal
@@ -75,7 +75,7 @@ const Modal = ({
           >
             <div
               className="  translate border-0  rounded-lg 
-              shadow-lg  flex flex-col w-full    bg-white  "
+              shadow-lg  flex flex-col w-full   bg-white overflow-y-auto max-h-[98vh] scroll-smooth"
             >
               {/* HEADER */}
               <div

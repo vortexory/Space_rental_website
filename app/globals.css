@@ -6,4 +6,29 @@ html,
 body,
 :root {
   height: 100%;
+
+  --primary: rgb(255, 255, 255);
+  --secondary: rgba(139, 139, 148, 0.349);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 2px solid var(--primary);
 }
