@@ -17,6 +17,7 @@ import Heading from '../Heading';
 import Input from '../Input/Input';
 import Button from '../Button';
 import { useRouter } from 'next/navigation';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
 
 const schema = z.object({
   email: z
@@ -33,8 +34,15 @@ export type FormValuesType = z.infer<typeof schema>;
 
 const LoginModal = () => {
   const router = useRouter();
-  const { isOpen, onClose } = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
+
+  const { isOpen, onClose } = useLoginModal();
+  const { onOpen: onRegisterOpen } = useRegisterModal();
+
+  const toggle = () => {
+    onClose();
+    onRegisterOpen();
+  };
 
   const {
     register,
@@ -118,7 +126,7 @@ const LoginModal = () => {
         <p>
           First time at Space?
           <span
-            onClick={onClose}
+            onClick={toggle}
             className=" text-indigo-800 font-bold  cursor-pointer hover:underline pl-2 "
           >
             Sign Up

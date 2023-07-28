@@ -16,6 +16,7 @@ import Heading from '../Heading';
 import Input from '../Input/Input';
 import Button from '../Button';
 import axios from 'axios';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
 // Define Zod schema for form validation
 const schema = z.object({
@@ -33,8 +34,15 @@ const schema = z.object({
 export type FormValuesType = z.infer<typeof schema>;
 
 const RegisterModal = () => {
-  const { isOpen, onClose } = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
+
+  const { isOpen, onClose } = useRegisterModal();
+  const { onOpen: onLoginOpen } = useLoginModal();
+
+  const toggle = () => {
+    onClose();
+    onLoginOpen();
+  };
 
   const {
     register,
@@ -45,24 +53,27 @@ const RegisterModal = () => {
   });
 
   const onSubmit: SubmitHandler<FormValuesType> = (data) => {
-
     setIsLoading(true);
-    axios.post('/api/register', data)
-    .then(() => {
-      toast.success('Registered!');
-      onClose();
-    })
-    .catch((error) => {
-      toast.error(error);
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
+    axios
+      .post('/api/register', data)
+      .then(() => {
+        toast.success('Registered!');
+        onClose();
+      })
+      .catch((error) => {
+        toast.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const bodyContent = (
     <div className="flex  flex-col gap-4  w-full  ">
-      <Heading title="Welcome to Space" subtitle="Create an account" />
+      <Heading
+        title="Welcome to Space"
+        subtitle="Create an account"
+      />
       <Input
         id="email"
         type="email"
@@ -115,7 +126,7 @@ const RegisterModal = () => {
         <p>
           Already have an account?
           <span
-            onClick={onClose}
+            onClick={toggle}
             className=" text-indigo-800 font-bold  cursor-pointer hover:underline pl-2 "
           >
             Log in
