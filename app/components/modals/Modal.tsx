@@ -86,7 +86,7 @@ const Modal = ({
                 justify-between
                 border-b-[1px]"
               >
-                <div className="text-lg font-semibold">{title}</div>
+                <div className="text-xl font-bold">{title}</div>
                 <button
                   onClick={handleClose}
                   className="  p-1

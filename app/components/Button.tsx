@@ -27,7 +27,7 @@ const Button = ({
          ${outline ? 'bg-white border-black text-black hover:bg-indigo-50'
                   : 'bg-indigo-500 border-indigo-500 text-white hover:opacity-80'}
          ${small? 'py-1 text-sm font-light border-[1px]'
-              : 'py-3 text-md font-semibold border-2'}
+              : 'py-2 text-md font-semibold border-2'}
 
   `}
     >
