@@ -16,6 +16,7 @@ import Modal from './Modal';
 import Heading from '../Heading';
 import Input from '../Input/Input';
 import Button from '../Button';
+import { useRouter } from 'next/navigation';
 
 const schema = z.object({
   email: z
@@ -31,6 +32,7 @@ const schema = z.object({
 export type FormValuesType = z.infer<typeof schema>;
 
 const LoginModal = () => {
+  const router = useRouter();
   const { isOpen, onClose } = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,17 +44,28 @@ const LoginModal = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormValuesType> = (data) => {
-    //to fix post data to end point
-    signIn('credentials', { ...data });
-    setIsLoading(true);
+  const onSubmit: SubmitHandler<FormValuesType> = async (data) => {
+    try {
+      setIsLoading(true);
+      const signInResponse = await signIn('credentials', {
+        ...data,
+        redirect: false,
+      });
 
-    toast.success(JSON.stringify(data));
-    setTimeout(() => {
-      onClose();
-    }, 3000);
+      if (signInResponse?.ok) {
+        toast.success('Logged in');
+        router.refresh();
+        onClose();
+      }
 
-    setIsLoading(false);
+      if (signInResponse?.error) {
+        toast.error(signInResponse.error);
+      }
+    } catch (error) {
+      toast.error('An unexpected error occurred during sign-in.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const bodyContent = (
@@ -103,12 +116,12 @@ const LoginModal = () => {
         "
       >
         <p>
-          Already have an account?
+          First time at Space?
           <span
             onClick={onClose}
             className=" text-indigo-800 font-bold  cursor-pointer hover:underline pl-2 "
           >
-            Log in
+            Sign Up
           </span>
         </p>
       </div>

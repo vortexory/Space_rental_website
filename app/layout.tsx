@@ -4,6 +4,8 @@ import './globals.css';
 import { Nunito } from 'next/font/google';
 import ToasterProvider from './providers/ToasterProvider';
 import ClientOnly from './components/ClientOnly';
+import LoginModal from './components/modals/LoginModal';
+import getCurrentUser from './actions/getCurrentUser';
 
 export const metadata = {
   title: 'Space',
@@ -12,18 +14,22 @@ export const metadata = {
 
 const nunito = Nunito({ subsets: ['latin'] });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  const currentUser = await getCurrentUser();
+  
   return (
     <html lang="en">
       <body className={nunito.className}>
         <ClientOnly>
           <ToasterProvider />
-          <Navbar />
+          <Navbar currentUser={currentUser}/>
           <RegisterModal />
+          <LoginModal />
         </ClientOnly>
         {children}
       </body>
