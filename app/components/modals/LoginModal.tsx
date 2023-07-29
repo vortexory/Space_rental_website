@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { signIn } from 'next-auth/react';
 
@@ -39,10 +39,10 @@ const LoginModal = () => {
   const { isOpen, onClose } = useLoginModal();
   const { onOpen: onRegisterOpen } = useRegisterModal();
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     onClose();
     onRegisterOpen();
-  };
+  }, [onClose, onRegisterOpen]);
 
   const {
     register,
@@ -114,7 +114,6 @@ const LoginModal = () => {
           signIn('google');
         }}
       />
-      
 
       <Button
         outline

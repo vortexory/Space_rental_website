@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 
 import { z } from 'zod';
@@ -42,11 +42,11 @@ const RegisterModal = () => {
   const { isOpen, onClose } = useRegisterModal();
   const { onOpen: onLoginOpen } = useLoginModal();
 
-  const toggle = () => {
+  const toggle = useCallback(() => {
     onClose();
     onLoginOpen();
-  };
-
+  }, [onClose, onLoginOpen]);
+  
   const {
     register,
     handleSubmit,
