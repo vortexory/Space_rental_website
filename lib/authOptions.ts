@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     CredentialsProvider({
-      name: 'Sign in',
+      name: 'credentials',
       credentials: {
         email: {
           label: 'Email',
@@ -60,5 +60,8 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: { signIn: '/' },
   debug: process.env.NODE_ENV === 'development',
+  session: {
+    strategy: 'jwt',
+  },
   secret: process.env.NEXTAUTH_SECRET,
 };

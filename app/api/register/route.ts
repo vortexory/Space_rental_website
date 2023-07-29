@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     });
 
     if (existingUser) {
-      return NextResponse.json({ error: 'Player already exists' }, { status: 409 });
+      return NextResponse.json({ error: 'Email already exists' }, { status: 409 });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
