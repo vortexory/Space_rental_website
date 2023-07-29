@@ -3,13 +3,25 @@ import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const body = await request.json();
-  const { email, name, password } = body;
-  const hashedPassword = await bcrypt.hash(password, 12);
 
-  const user = await prisma.user.create({
-    data: { email, name, hashedPassword },
-  });
+    const { email, name, password } = await request.json();
 
-  return NextResponse.json(user);
+    // Check if the user with the provided email already exists
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (existingUser) {
+      return NextResponse.json({ error: 'Player already exists' }, { status: 409 });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+    const user = await prisma.user.create({
+      data: { email, name, hashedPassword },
+    });
+
+    return NextResponse.json({ user });
+ 
 }

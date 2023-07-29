@@ -17,6 +17,8 @@ import Input from '../Input/Input';
 import Button from '../Button';
 import axios from 'axios';
 import useLoginModal from '@/app/hooks/useLoginModal';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 // Define Zod schema for form validation
 const schema = z.object({
@@ -34,6 +36,7 @@ const schema = z.object({
 export type FormValuesType = z.infer<typeof schema>;
 
 const RegisterModal = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const { isOpen, onClose } = useRegisterModal();
@@ -52,20 +55,32 @@ const RegisterModal = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormValuesType> = (data) => {
+  const onSubmit: SubmitHandler<FormValuesType> = async (data) => {
     setIsLoading(true);
-    axios
-      .post('/api/register', data)
-      .then(() => {
-        toast.success('Registered!');
-        onClose();
-      })
-      .catch((error) => {
-        toast.error(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
+    toast.loading('Sending Request ', { id: '1' });
+
+    try {
+      await axios.post('/api/register', data);
+      await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
       });
+      router.refresh();
+      toast.success('Registered!', { id: '1' });
+
+      onClose();
+      return;
+      // onLoginOpen();
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error ||
+          'An unexpected error occurred during registration.',
+        { id: '1' }
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const bodyContent = (
