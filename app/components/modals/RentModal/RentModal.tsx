@@ -6,13 +6,17 @@ import Heading from '../../Heading';
 import { categories } from '@/data/categories';
 import CategoryInput from '../../Input/CategoryInput';
 import { z } from 'zod';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import CountrySelect from '../../Input/CountrySelect';
 import dynamic from 'next/dynamic';
 import CategoryBody from './CategoryBody';
 import LocationBody from './LocationBody';
 import InfoBody from './InfoBody';
 import ImageBody from './ImageBody';
+import DescriptionBody from './DescriptionBody';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 enum STEPS {
   CATEGORY = 0,
@@ -20,7 +24,6 @@ enum STEPS {
   INFO = 2,
   IMAGES = 3,
   DESCRIPTION = 4,
-  PRICE = 5,
 }
 
 const locationSchema = z.object({
@@ -49,6 +52,7 @@ export type locationType = z.infer<typeof locationSchema>;
 export type FormFieldKeys = keyof FormFieldValues;
 
 const RentModal = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { isOpen: isRentOpen, onClose: onRentClose } = useRentModal();
 
@@ -60,8 +64,17 @@ const RentModal = () => {
     setStep((value) => value + 1);
   };
 
+  const onSubmit: SubmitHandler<FormFieldValues> = (data) => {
+    if (step !== STEPS.DESCRIPTION) {
+      return onNext();
+    }
+
+    setIsLoading(true);
+    console.log(data);
+  };
+
   const actionLabel = useMemo(() => {
-    if (step === STEPS.PRICE) {
+    if (step === STEPS.DESCRIPTION) {
       return 'Create';
     }
     return 'Next';
@@ -150,6 +163,16 @@ const RentModal = () => {
         />
       );
       break;
+
+    case STEPS.DESCRIPTION:
+      bodyContent = (
+        <DescriptionBody
+          isLoading={isLoading}
+          register={register}
+          errors={errors}
+        />
+      );
+      break;
   }
 
   return (
@@ -160,8 +183,8 @@ const RentModal = () => {
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
+      onSubmit={handleSubmit(onSubmit)}
       onClose={onRentClose}
-      onSubmit={onNext}
       body={bodyContent}
     />
   );
