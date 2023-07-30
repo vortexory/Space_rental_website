@@ -12,6 +12,7 @@ import dynamic from 'next/dynamic';
 import CategoryBody from './CategoryBody';
 import LocationBody from './LocationBody';
 import InfoBody from './InfoBody';
+import ImageBody from './ImageBody';
 
 enum STEPS {
   CATEGORY = 0,
@@ -100,6 +101,7 @@ const RentModal = () => {
   const guestCount = watch('guestCount');
   const roomCount = watch('roomCount');
   const bathroomCount = watch('bathroomCount');
+  const imageSrc = watch('imageSrc');
 
   const setCustomValue = (id: FormFieldKeys, value: any) => {
     setValue(id, value, {
@@ -140,7 +142,14 @@ const RentModal = () => {
       );
       break;
 
-      
+    case STEPS.IMAGES:
+      bodyContent = (
+        <ImageBody
+          imageSrc={imageSrc}
+          setCustomValue={setCustomValue}
+        />
+      );
+      break;
   }
 
   return (
