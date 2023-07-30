@@ -36,11 +36,11 @@ export default async function RootLayout({
           <LoginModal />
           <RentModal />
         </ClientOnly>
-        <div className="flex flex-row min-h-screen">
+        <div className="flex flex-row min-h-screen ">
           <ClientOnly>
             <Sidebar />
           </ClientOnly>
-          <div className="ml-36">{children}</div>
+          <div className=" w-full">{children}</div>
         </div>
       </body>
     </html>

@@ -26,21 +26,19 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
       currentQuery = qs.parse(params.toString());
     }
 
-
     const updatedQuery: any = {
       ...currentQuery,
       category: label,
     };
 
-  // If the current query already has a "category" key and its value matches the "label" variable,
-  // remove the "category" key from the "updatedQuery" to toggle the category style off.
+    // If the current query already has a "category" key and its value matches the "label" variable,
+    // remove the "category" key from the "updatedQuery" to toggle the category style off.
     if (params?.get('category') === label) {
       delete updatedQuery.category;
     }
 
-
-  // Using "qs.stringifyUrl" to convert the "updatedQuery" object back to a query string and combine it with the base URL ("/")
-  // The "skipNull" option is set to true to skip any key-value pair with a null or undefined value in the resulting query string
+    // Using "qs.stringifyUrl" to convert the "updatedQuery" object back to a query string and combine it with the base URL ("/")
+    // The "skipNull" option is set to true to skip any key-value pair with a null or undefined value in the resulting query string
     const url = qs.stringifyUrl(
       {
         url: '/',
@@ -67,7 +65,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
        
       `}
     >
-      <div className=" font-medium text-sm">{label}</div>
+      <div className=" font-medium text-sm hidden sm:flex">{label}</div>
       <Icon size={26} />
     </div>
   );
