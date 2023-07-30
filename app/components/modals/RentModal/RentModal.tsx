@@ -17,6 +17,7 @@ import DescriptionBody from './DescriptionBody';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { isUndefined } from 'util';
 
 enum STEPS {
   CATEGORY = 0,
@@ -41,7 +42,7 @@ const zodFormSchema = z.object({
   roomCount: z.number().int().min(1),
   bathroomCount: z.number().int().min(1),
   imageSrc: z.string(),
-  price: z.number().min(1),
+  price: z.coerce.number(),
   title: z.string(),
   description: z.string(),
 });
@@ -62,15 +63,6 @@ const RentModal = () => {
   };
   const onNext = () => {
     setStep((value) => value + 1);
-  };
-
-  const onSubmit: SubmitHandler<FormFieldValues> = (data) => {
-    if (step !== STEPS.DESCRIPTION) {
-      return onNext();
-    }
-
-    setIsLoading(true);
-    console.log(data);
   };
 
   const actionLabel = useMemo(() => {
@@ -95,6 +87,7 @@ const RentModal = () => {
     watch,
     formState: { errors },
     reset,
+    setError,
   } = useForm<FormFieldValues>({
     defaultValues: {
       category: '',
@@ -103,7 +96,6 @@ const RentModal = () => {
       roomCount: 1,
       bathroomCount: 1,
       imageSrc: '',
-      price: 1,
       title: '',
       description: '',
     },
@@ -115,6 +107,9 @@ const RentModal = () => {
   const roomCount = watch('roomCount');
   const bathroomCount = watch('bathroomCount');
   const imageSrc = watch('imageSrc');
+  const description = watch('description');
+  const title = watch('title');
+  const price = watch('price');
 
   const setCustomValue = (id: FormFieldKeys, value: any) => {
     setValue(id, value, {
@@ -122,6 +117,40 @@ const RentModal = () => {
       shouldTouch: true,
       shouldValidate: true,
     });
+  };
+
+
+  const onSubmit: SubmitHandler<FormFieldValues> = (data) => {
+    if (step !== STEPS.DESCRIPTION) {
+      return onNext();
+    }
+ 
+    if (step === STEPS.DESCRIPTION) {
+      if (![description, title, price].every(Boolean)) {
+        !description &&
+          setError('description', { message: 'Description is required' });
+        !title && setError('title', { message: 'Title is required' });
+        !price && setError('price', { message: 'Price is required' });
+        return;
+      }
+
+      setIsLoading(true);
+      axios
+        .post('/api/listings', data)
+        .then(() => {
+          toast.success('Listing created!');
+          router.refresh();
+          reset();
+          setStep(STEPS.CATEGORY);
+          onRentClose();
+        })
+        .catch(() => {
+          toast.error('Something went wrong.');
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   };
 
   let bodyContent;
