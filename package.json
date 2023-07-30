@@ -24,6 +24,7 @@
     "next": "^13.4.12",
     "next-auth": "^0.0.0-pr.6777.c5550344",
     "postcss": "8.4.21",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",

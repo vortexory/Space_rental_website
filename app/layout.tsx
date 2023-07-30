@@ -6,6 +6,7 @@ import ToasterProvider from './providers/ToasterProvider';
 import ClientOnly from './components/ClientOnly';
 import LoginModal from './components/modals/LoginModal';
 import getCurrentUser from './actions/getCurrentUser';
+import Sidebar from './components/sidebar/Sidebar';
 
 export const metadata = {
   title: 'Space',
@@ -19,19 +20,23 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const currentUser = await getCurrentUser();
-  
+
   return (
     <html lang="en">
       <body className={nunito.className}>
         <ClientOnly>
           <ToasterProvider />
-          <Navbar currentUser={currentUser}/>
+          <Navbar currentUser={currentUser} />
           <RegisterModal />
           <LoginModal />
         </ClientOnly>
-        {children}
+        <div className="flex flex-row min-h-screen">
+          <ClientOnly>
+            <Sidebar />
+          </ClientOnly>
+          <div className="ml-36">{children}</div>
+        </div>
       </body>
     </html>
   );

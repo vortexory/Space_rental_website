@@ -12,7 +12,7 @@ interface NavbarProps {
 
 const Navbar = ({ currentUser }: NavbarProps) => {
   return (
-    <div className="pb-20">
+    <div  className="pb-[4.3rem]">
       <div className="fixed w-full bg-white  z-10 shadow-sm ">
         <div className="py-3 border-b-[1px]">
           <Container>
