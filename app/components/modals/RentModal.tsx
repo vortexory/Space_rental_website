@@ -8,6 +8,7 @@ import CategoryInput from '../Input/CategoryInput';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import CountrySelect from '../Input/CountrySelect';
+import dynamic from 'next/dynamic';
 
 enum STEPS {
   CATEGORY = 0,
@@ -86,6 +87,11 @@ const RentModal = () => {
   const category = watch('category');
   const location = watch('location');
 
+  const Map = useMemo(
+    () => dynamic(() => import('../Map'), { ssr: false }),
+    [location]
+  );
+
   const setCustomValue = (id: FormFieldKeys, value: any) => {
     setValue(id, value, {
       shouldDirty: true,
@@ -144,6 +150,7 @@ const RentModal = () => {
             value={location}
             onChange={(val) => setCustomValue('location', val)}
           />
+          <Map location={location} />
         </div>
       );
       break;
