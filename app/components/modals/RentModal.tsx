@@ -19,10 +19,17 @@ enum STEPS {
   PRICE = 5,
 }
 
+const locationSchema = z.object({
+  value: z.string(),
+  label: z.string(),
+  latlng: z.array(z.number()),
+  region: z.string(),
+});
+
 // Define the Zod schema for the form fields
 const zodFormSchema = z.object({
   category: z.string(),
-  location: z.nullable(z.string()), // Assuming the location can be null or a string
+  location: z.union([locationSchema, z.null()]),
   guestCount: z.number().int().min(1),
   roomCount: z.number().int().min(1),
   bathroomCount: z.number().int().min(1),
@@ -33,6 +40,7 @@ const zodFormSchema = z.object({
 });
 
 type FormFieldValues = z.infer<typeof zodFormSchema>;
+export type locationType = z.infer<typeof locationSchema>;
 
 type FormFieldKeys = keyof FormFieldValues;
 
@@ -150,6 +158,7 @@ const RentModal = () => {
             value={location}
             onChange={(val) => setCustomValue('location', val)}
           />
+          <pre>{JSON.stringify(location, null, 2)}</pre>
           <Map location={location} />
         </div>
       );

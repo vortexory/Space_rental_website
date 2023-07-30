@@ -4,15 +4,15 @@ import Select from 'react-select';
 
 import useCountries, { FormattedCountry } from '@/app/hooks/useCountries';
 import { FlagIcon } from 'react-flag-kit';
+import { locationType } from '../modals/RentModal';
 
 interface CountrySelectProps {
-  value?: string | null;
+  value?: locationType | null;
   onChange: (value: FormattedCountry) => void;
 }
 
 const CountrySelect = ({ value, onChange }: CountrySelectProps) => {
-  const { getAll, getByValue } = useCountries();
-  const location = getByValue(value as string);
+  const { getAll } = useCountries();
 
   return (
     <div>
@@ -20,7 +20,7 @@ const CountrySelect = ({ value, onChange }: CountrySelectProps) => {
         placeholder="Anywhere"
         isClearable
         options={getAll()}
-        value={location}
+        value={value}
         onChange={(value) => onChange(value as FormattedCountry)}
         formatOptionLabel={(option: any) => (
           <div
