@@ -87,7 +87,6 @@ const RentModal = () => {
     watch,
     formState: { errors },
     reset,
-    setError,
   } = useForm<FormFieldValues>({
     defaultValues: {
       category: '',
@@ -119,38 +118,49 @@ const RentModal = () => {
     });
   };
 
-
   const onSubmit: SubmitHandler<FormFieldValues> = (data) => {
     if (step !== STEPS.DESCRIPTION) {
       return onNext();
     }
- 
-    if (step === STEPS.DESCRIPTION) {
-      if (![description, title, price].every(Boolean)) {
-        !description &&
-          setError('description', { message: 'Description is required' });
-        !title && setError('title', { message: 'Title is required' });
-        !price && setError('price', { message: 'Price is required' });
-        return;
-      }
 
-      setIsLoading(true);
-      axios
-        .post('/api/listings', data)
-        .then(() => {
-          toast.success('Listing created!');
-          router.refresh();
-          reset();
-          setStep(STEPS.CATEGORY);
-          onRentClose();
-        })
-        .catch(() => {
-          toast.error('Something went wrong.');
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+    if (
+      ![
+        category,
+        location,
+        guestCount,
+        roomCount,
+        bathroomCount,
+        imageSrc,
+        description,
+        title,
+        price,
+      ].every(Boolean)
+    ) {
+      toast.error('All fields are required in order to create a new listing!', {
+        id: '1',
+      });
+
+      return;
     }
+
+    setIsLoading(true);
+    toast.loading('Loading...', { id: '1' });
+
+    axios
+      .post('/api/listings', data)
+      .then(() => {
+        toast.success('Listing created!', { id: '1' });
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        onRentClose();
+      })
+      .catch(() => {
+        toast.error('Something went wrong.', { id: '1' });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   let bodyContent;
