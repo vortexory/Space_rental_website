@@ -3,7 +3,7 @@ import './globals.css';
 
 import RegisterModal from './components/modals/RegisterModal';
 import LoginModal from './components/modals/LoginModal';
-import RentModal from './components/modals/RentModal';
+import RentModal from './components/modals/RentModal/RentModal';
 
 import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';

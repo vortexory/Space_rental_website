@@ -4,7 +4,7 @@ import Select from 'react-select';
 
 import useCountries, { FormattedCountry } from '@/app/hooks/useCountries';
 import { FlagIcon } from 'react-flag-kit';
-import { locationType } from '../modals/RentModal';
+import { locationType } from '../modals/RentModal/RentModal';
 
 interface CountrySelectProps {
   value?: locationType | null;

@@ -1,14 +1,16 @@
 'use client';
 import React, { useMemo, useState } from 'react';
-import Modal from './Modal';
+import Modal from '../Modal';
 import useRentModal from '@/app/hooks/useRentModal';
-import Heading from '../Heading';
+import Heading from '../../Heading';
 import { categories } from '@/data/categories';
-import CategoryInput from '../Input/CategoryInput';
+import CategoryInput from '../../Input/CategoryInput';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
-import CountrySelect from '../Input/CountrySelect';
+import CountrySelect from '../../Input/CountrySelect';
 import dynamic from 'next/dynamic';
+import CategoryBody from './CategoryBody';
+import LocationBody from './LocationBody';
 
 enum STEPS {
   CATEGORY = 0,
@@ -42,7 +44,7 @@ const zodFormSchema = z.object({
 type FormFieldValues = z.infer<typeof zodFormSchema>;
 export type locationType = z.infer<typeof locationSchema>;
 
-type FormFieldKeys = keyof FormFieldValues;
+export type FormFieldKeys = keyof FormFieldValues;
 
 const RentModal = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -95,11 +97,6 @@ const RentModal = () => {
   const category = watch('category');
   const location = watch('location');
 
-  const Map = useMemo(
-    () => dynamic(() => import('../Map'), { ssr: false }),
-    [location]
-  );
-
   const setCustomValue = (id: FormFieldKeys, value: any) => {
     setValue(id, value, {
       shouldDirty: true,
@@ -112,53 +109,19 @@ const RentModal = () => {
   switch (step) {
     case STEPS.CATEGORY:
       bodyContent = (
-        <div className="flex flex-col gap-8">
-          <Heading
-            title="Which of these best describes your place?"
-            subtitle="Pick a category"
-          />
-          <div
-            className="
-        grid 
-        grid-cols-2 md:grid-cols-3 
-        gap-1 md:gap-3
-        max-h-[50vh]
-        overflow-y-auto
-      "
-          >
-            {Object.entries(categories).map(
-              ([label, { icon, description }]) => (
-                <div
-                  key={label}
-                  className="col-span-1s"
-                >
-                  <CategoryInput
-                    onClick={(category) => setCustomValue('category', category)}
-                    selected={category === label}
-                    label={label}
-                    icon={icon}
-                  />
-                </div>
-              )
-            )}
-          </div>
-        </div>
+        <CategoryBody
+          category={category}
+          setCustomValue={setCustomValue}
+        />
       );
       break;
 
     case STEPS.LOCATION:
       bodyContent = (
-        <div className="flex flex-col gap-8">
-          <Heading
-            title="Where is your place located?"
-            subtitle="Help guests find you!"
-          />
-          <CountrySelect
-            value={location}
-            onChange={(val) => setCustomValue('location', val)}
-          />
-          <Map location={location} />
-        </div>
+        <LocationBody
+          location={location}
+          setCustomValue={setCustomValue}
+        />
       );
       break;
   }
