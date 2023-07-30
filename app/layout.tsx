@@ -1,12 +1,16 @@
-import RegisterModal from './components/modals/RegisterModal';
-import Navbar from './components/navbar/Navbar';
-import './globals.css';
 import { Nunito } from 'next/font/google';
-import ToasterProvider from './providers/ToasterProvider';
-import ClientOnly from './components/ClientOnly';
+import './globals.css';
+
+import RegisterModal from './components/modals/RegisterModal';
 import LoginModal from './components/modals/LoginModal';
-import getCurrentUser from './actions/getCurrentUser';
+import RentModal from './components/modals/RentModal';
+
+import Navbar from './components/navbar/Navbar';
 import Sidebar from './components/sidebar/Sidebar';
+import ClientOnly from './components/ClientOnly';
+import ToasterProvider from './providers/ToasterProvider';
+
+import getCurrentUser from './actions/getCurrentUser';
 
 export const metadata = {
   title: 'Space',
@@ -30,6 +34,7 @@ export default async function RootLayout({
           <Navbar currentUser={currentUser} />
           <RegisterModal />
           <LoginModal />
+          <RentModal />
         </ClientOnly>
         <div className="flex flex-row min-h-screen">
           <ClientOnly>
