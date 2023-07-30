@@ -67,7 +67,7 @@ const Modal = ({
       >
         <div className="   rounded-lg h-full flex items-center  2xl:mt-0 ">
           <div
-            className={`translate duration-300  w-full md:max-w-md mx-auto ${
+            className={`translate duration-300  w-full md:max-w-lg xl:max-w-xl mx-auto ${
               showModal
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-full opacity-0 '
@@ -102,7 +102,7 @@ const Modal = ({
               <div className="relative p-6 flex-auto">{body}</div>
               {/* FOOTER */}
               <div className="flex flex-col gap-2 px-6 pb-6  ">
-                <div className="flex items-center self-start gap-4 no w-full  ">
+                <div className="flex items-center self-start gap-4  w-full  ">
                   {secondaryAction && secondaryActionLabel && (
                     <Button
                       disabled={disabled}
