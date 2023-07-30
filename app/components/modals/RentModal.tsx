@@ -7,6 +7,7 @@ import { categories } from '@/data/categories';
 import CategoryInput from '../Input/CategoryInput';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
+import CountrySelect from '../Input/CountrySelect';
 
 enum STEPS {
   CATEGORY = 0,
@@ -83,6 +84,7 @@ const RentModal = () => {
   });
 
   const category = watch('category');
+  const location = watch('location');
 
   const setCustomValue = (id: FormFieldKeys, value: any) => {
     setValue(id, value, {
@@ -92,38 +94,60 @@ const RentModal = () => {
     });
   };
 
-  const bodyContent = (
-    <div className="flex flex-col gap-8">
-      <Heading
-        title="Which of these best describes your place?"
-        subtitle="Pick a category"
-      />
-      <div
-        className="
-          grid 
-          grid-cols-2 md:grid-cols-3 
-          gap-1 md:gap-3
-          max-h-[50vh]
-          overflow-y-auto
-        "
-      >
-        {Object.entries(categories).map(([label, { icon, description }]) => (
+  let bodyContent;
+  switch (step) {
+    case STEPS.CATEGORY:
+      bodyContent = (
+        <div className="flex flex-col gap-8">
+          <Heading
+            title="Which of these best describes your place?"
+            subtitle="Pick a category"
+          />
           <div
-            key={label}
-            className="col-span-1s"
+            className="
+        grid 
+        grid-cols-2 md:grid-cols-3 
+        gap-1 md:gap-3
+        max-h-[50vh]
+        overflow-y-auto
+      "
           >
-            {/* {label} */}
-            <CategoryInput
-              onClick={(category) => setCustomValue('category', category)}
-              selected={category === label}
-              label={label}
-              icon={icon}
-            />
+            {Object.entries(categories).map(
+              ([label, { icon, description }]) => (
+                <div
+                  key={label}
+                  className="col-span-1s"
+                >
+                  {/* {label} */}
+                  <CategoryInput
+                    onClick={(category) => setCustomValue('category', category)}
+                    selected={category === label}
+                    label={label}
+                    icon={icon}
+                  />
+                </div>
+              )
+            )}
           </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+      );
+      break;
+
+    case STEPS.LOCATION:
+      bodyContent = (
+        <div className="flex flex-col gap-8">
+          <Heading
+            title="Where is your place located?"
+            subtitle="Help guests find you!"
+          />
+          <CountrySelect
+            value={location}
+            onChange={(val) => setCustomValue('location', val)}
+          />
+        </div>
+      );
+      break;
+  }
 
   return (
     <Modal

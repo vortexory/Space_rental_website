@@ -75,7 +75,7 @@ const Modal = ({
           >
             <div
               className="  translate border-0  rounded-lg 
-              shadow-lg  flex flex-col w-full   bg-white overflow-y-auto max-h-[98vh] scroll-smooth"
+              shadow-lg  flex flex-col w-full   bg-white overflow-y-auto max-h-[98vh] min-h-[80vh] scroll-smooth"
             >
               {/* HEADER */}
               <div
