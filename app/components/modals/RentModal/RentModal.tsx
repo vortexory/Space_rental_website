@@ -11,6 +11,7 @@ import CountrySelect from '../../Input/CountrySelect';
 import dynamic from 'next/dynamic';
 import CategoryBody from './CategoryBody';
 import LocationBody from './LocationBody';
+import InfoBody from './InfoBody';
 
 enum STEPS {
   CATEGORY = 0,
@@ -96,6 +97,9 @@ const RentModal = () => {
 
   const category = watch('category');
   const location = watch('location');
+  const guestCount = watch('guestCount');
+  const roomCount = watch('roomCount');
+  const bathroomCount = watch('bathroomCount');
 
   const setCustomValue = (id: FormFieldKeys, value: any) => {
     setValue(id, value, {
@@ -124,6 +128,19 @@ const RentModal = () => {
         />
       );
       break;
+
+    case STEPS.INFO:
+      bodyContent = (
+        <InfoBody
+          setCustomValue={setCustomValue}
+          guestCount={guestCount}
+          roomCount={roomCount}
+          bathroomCount={bathroomCount}
+        />
+      );
+      break;
+
+      
   }
 
   return (
