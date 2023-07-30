@@ -132,7 +132,6 @@ const RentModal = () => {
                   key={label}
                   className="col-span-1s"
                 >
-                  {/* {label} */}
                   <CategoryInput
                     onClick={(category) => setCustomValue('category', category)}
                     selected={category === label}
@@ -158,7 +157,6 @@ const RentModal = () => {
             value={location}
             onChange={(val) => setCustomValue('location', val)}
           />
-          <pre>{JSON.stringify(location, null, 2)}</pre>
           <Map location={location} />
         </div>
       );
