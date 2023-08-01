@@ -1,12 +1,11 @@
-'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import useCountries from '@/app/hooks/useCountries';
 
 import HeartButton from '../HeartButton';
 import { Favorite, Listing, User } from '@prisma/client';
+import Link from 'next/link';
 
 interface ListingCardProps {
   data: Listing;
@@ -15,15 +14,14 @@ interface ListingCardProps {
 }
 
 const ListingCard = ({ data, currentUser, favorites }: ListingCardProps) => {
-  const router = useRouter();
 
   const { getByValue } = useCountries();
 
   const location = getByValue(data.locationValue);
 
   return (
-    <div
-      onClick={() => router.push(`/listings/${data.id}`)}
+    <Link
+      href={`/listings/${data.id}`}
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full">
@@ -54,7 +52,7 @@ const ListingCard = ({ data, currentUser, favorites }: ListingCardProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
