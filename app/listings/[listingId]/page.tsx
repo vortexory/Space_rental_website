@@ -21,11 +21,13 @@ const SingleListing = async ({ params }: { params: { listingId: string } }) => {
   }
 
   return (
-    <SingleListingView
-      listing={listing}
-      currentUser={currentUser}
-      favorites={favorites}
-    />
+    <ClientOnly>
+      <SingleListingView
+        listing={listing}
+        currentUser={currentUser}
+        favorites={favorites}
+      />
+    </ClientOnly>
   );
 };
 
