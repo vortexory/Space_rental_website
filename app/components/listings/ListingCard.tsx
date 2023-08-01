@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-
 import useCountries from '@/app/hooks/useCountries';
 
 import HeartButton from '../HeartButton';
@@ -49,6 +48,10 @@ const ListingCard = ({ data, currentUser, favorites }: ListingCardProps) => {
             {location?.region}, {location?.label}
           </span>
           <span className="font-light text-neutral-500">{data.category}</span>
+          <div className="flex flex-row items-center gap-1">
+            <span className="font-semibold">$ {data.price}</span>{' '}
+            <div className="font-light">/ night</div>
+          </div>
         </div>
       </div>
     </div>
