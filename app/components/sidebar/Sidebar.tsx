@@ -1,6 +1,6 @@
 'use client';
 
-import {  useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { categories } from '@/data/categories';
 import CategoryBox from './CategoryItem';
 
@@ -8,7 +8,12 @@ const Sidebar = () => {
   const params = useSearchParams();
   const category = params?.get('category');
 
-
+  const pathname = usePathname();
+  const isMainPage = pathname === '/';
+  if (!isMainPage) {
+    return null;
+  }
+  
   return (
     <div
       className="
@@ -17,7 +22,7 @@ const Sidebar = () => {
         h-full shadow-md
         "
     >
-      {Object.entries(categories).map(([label, {  icon }]) => (
+      {Object.entries(categories).map(([label, { icon }]) => (
         <CategoryBox
           key={label}
           label={label}
