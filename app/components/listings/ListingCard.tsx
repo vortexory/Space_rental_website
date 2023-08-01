@@ -2,36 +2,25 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
-import { format } from 'date-fns';
+
 
 import useCountries from '@/app/hooks/useCountries';
 
 import HeartButton from '../HeartButton';
-import Button from '../Button';
-import ClientOnly from '../ClientOnly';
-import { Listing, Reservation, User } from '@prisma/client';
+import { Favorite, Listing, User } from '@prisma/client';
 
 interface ListingCardProps {
   data: Listing;
-  onAction?: (id: string) => void;
-  disabled?: boolean;
-  actionLabel?: string;
-  actionId?: string;
   currentUser?: User | null;
+  favorites: Favorite[];
 }
 
-const ListingCard = ({
-  data,
-  currentUser,
-}: ListingCardProps) => {
+const ListingCard = ({ data, currentUser, favorites }: ListingCardProps) => {
   const router = useRouter();
 
   const { getByValue } = useCountries();
 
   const location = getByValue(data.locationValue);
-
- 
 
   return (
     <div
@@ -51,6 +40,7 @@ const ListingCard = ({
             <HeartButton
               listingId={data.id}
               currentUser={currentUser}
+              favorites={favorites}
             />
           </div>
         </div>
@@ -60,7 +50,6 @@ const ListingCard = ({
           </span>
           <span className="font-light text-neutral-500">{data.category}</span>
         </div>
-     
       </div>
     </div>
   );

@@ -54,7 +54,12 @@ model Favorite {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  listingId String
+
+  @@unique([userId, listingId])
   @@index([userId])
+  @@index([listingId])
 }
 
 model Listing {
@@ -74,6 +79,7 @@ model Listing {
   userId String
 
   reservations Reservation[]
+  Favorite     Favorite[]
 
   @@index([userId])
 }

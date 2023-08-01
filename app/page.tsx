@@ -5,6 +5,7 @@ import EmptyState from '@/app/components/EmptyState';
 import getListings, { ListingsParams } from '@/app/actions/getListings';
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import ClientOnly from './components/ClientOnly';
+import { getUserFavorites } from './actions/getUserFavorites';
 
 interface HomeProps {
   searchParams: ListingsParams;
@@ -13,6 +14,7 @@ interface HomeProps {
 const Home = async ({ searchParams }: HomeProps) => {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
+  const favorites = await getUserFavorites(currentUser?.id);
 
   if (!listings.length) {
     return (
@@ -35,6 +37,7 @@ const Home = async ({ searchParams }: HomeProps) => {
             key={listing.id}
             currentUser={currentUser}
             data={listing}
+            favorites={favorites}
           />
         ))}
       </div>
