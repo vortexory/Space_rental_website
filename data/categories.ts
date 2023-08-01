@@ -13,8 +13,14 @@ import { FaSkiing } from 'react-icons/fa';
 import { BsSnow } from 'react-icons/bs';
 import { IoDiamond } from 'react-icons/io5';
 import { MdOutlineVilla } from 'react-icons/md';
+import { IconType } from 'react-icons';
 
-export const categories = {
+export interface Category {
+  icon: IconType;
+  description: string;
+}
+
+export const categories: Record<string, Category> = {
   Beach: {
     icon: TbBeach,
     description: 'This property is close to the beach!',
