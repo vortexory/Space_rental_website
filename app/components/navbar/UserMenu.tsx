@@ -10,6 +10,7 @@ import useLoginModal from '@/app/hooks/useLoginModal';
 import { User } from '@prisma/client';
 import { signOut } from 'next-auth/react';
 import useRentModal from '@/app/hooks/useRentModal';
+import { useRouter } from 'next/navigation';
 
 interface UserMenuProps {
   currentUser: User | null;
@@ -17,6 +18,7 @@ interface UserMenuProps {
 
 const UserMenu = ({ currentUser }: UserMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -25,7 +27,6 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const { onOpen: onOpenRegiter } = useRegisterModal();
   const { onOpen: onOpenLogin } = useLoginModal();
   const { onOpen: onOpenRent } = useRentModal();
-
 
   const onRent = useCallback(() => {
     if (!currentUser) {
@@ -65,6 +66,10 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                 <MenuItem
                   onClick={onOpenRent}
                   label="Your Home"
+                />
+                <MenuItem
+                  onClick={() => router.push('/trips')}
+                  label="My Reservations"
                 />
                 <hr />
                 <MenuItem
