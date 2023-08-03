@@ -8,7 +8,7 @@ const FavoritesPage = async () => {
   const currentUser = await getCurrentUser();
   const favorites = await getUserFavorites(currentUser?.id);
 
-  if (favorites.length === 0) {
+  if (favorites?.length === 0) {
     return (
       <ClientOnly>
         <EmptyState
