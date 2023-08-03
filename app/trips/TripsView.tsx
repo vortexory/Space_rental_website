@@ -16,7 +16,7 @@ interface SingleTripeViewProps {
   favorites: Favorite[];
 }
 
-const SingleTripView = ({
+const TripsView = ({
   reservations,
   currentUser,
   favorites,
@@ -69,4 +69,4 @@ const SingleTripView = ({
   );
 };
 
-export default SingleTripView;
+export default TripsView;

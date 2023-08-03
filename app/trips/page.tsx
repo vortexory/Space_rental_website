@@ -3,7 +3,7 @@ import ClientOnly from '@/app/components/ClientOnly';
 
 import getCurrentUser from '@/app/actions/getCurrentUser';
 
-import SingleTripView from './SingleTripView';
+import TripsView from './TripsView';
 import getReservations from '../actions/getReservation';
 import { getUserFavorites } from '../actions/getUserFavorites';
 
@@ -22,14 +22,15 @@ const TripsPage = async () => {
     );
   }
 
-  const reservations = await getReservations({ userId: currentUser.id });
+  //to get trips that the current user have reserved
+  const CurrentUserTrips = await getReservations({ userId: currentUser.id });
 
-  if (reservations.length === 0) {
+  if (CurrentUserTrips.length === 0) {
     return (
       <ClientOnly>
         <EmptyState
-          title="No trips found"
-          subtitle="Looks like you haven't reserved any trip yet!"
+          title="No reservations found"
+          subtitle="Looks like you have no reservations on your properties!"
         />
       </ClientOnly>
     );
@@ -37,8 +38,8 @@ const TripsPage = async () => {
 
   return (
     <ClientOnly>
-      <SingleTripView
-        reservations={reservations}
+      <TripsView
+        reservations={CurrentUserTrips}
         currentUser={currentUser}
         favorites={favorites}
       />
