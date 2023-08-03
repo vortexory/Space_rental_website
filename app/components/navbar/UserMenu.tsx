@@ -43,7 +43,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         "
           onClick={onRent}
         >
-          Your Home
+          Home
         </div>
         <div
           onClick={toggleOpen}
@@ -56,7 +56,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm ">
+        <div className="absolute rounded-xl shadow-md md:w-full bg-white overflow-hidden right-0 top-12 text-sm ">
           <div
             className="flex flex-col cursor-pointer"
             onClick={() => setIsOpen(false)}
@@ -65,7 +65,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
               <>
                 <MenuItem
                   onClick={onOpenRent}
-                  label="Your Home"
+                  label="Home"
+                />
+                <MenuItem
+                  onClick={() => router.push('/proprieties')}
+                  label="My Proprieties"
                 />
                 <MenuItem
                   onClick={() => router.push('/favorites')}
