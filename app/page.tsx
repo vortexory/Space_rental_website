@@ -19,25 +19,27 @@ const Home = async ({ searchParams }: HomeProps) => {
   if (!listings.length) {
     return (
       <ClientOnly>
-          <EmptyState showReset />
+        <EmptyState showReset />
       </ClientOnly>
     );
   }
 
   return (
-    <div
-      className="ml-14 sm:ml-36 p-10 z-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+    <ClientOnly>
+      <div
+        className="ml-14 sm:ml-36 p-10 z-50 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
             xl:grid-cols-5  2xl:grid-cols-6 gap-8 "
-    >
-      {listings.map((listing: any) => (
-        <ListingCard
-          key={listing.id}
-          currentUser={currentUser}
-          data={listing}
-          favorites={favorites}
-        />
-      ))}
-    </div>
+      >
+        {listings.map((listing: any) => (
+          <ListingCard
+            key={listing.id}
+            currentUser={currentUser}
+            data={listing}
+            favorites={favorites}
+          />
+        ))}
+      </div>
+    </ClientOnly>
   );
 };
 
