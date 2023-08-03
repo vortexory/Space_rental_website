@@ -24,6 +24,7 @@ const SingleListing = async ({ params }: { params: { listingId: string } }) => {
 
   return (
     <ClientOnly>
+      <div className="h-4" />
       <SingleListingView
         listing={listing}
         currentUser={currentUser}

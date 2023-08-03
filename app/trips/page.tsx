@@ -38,6 +38,7 @@ const TripsPage = async () => {
 
   return (
     <ClientOnly>
+      <div className="h-4" />
       <TripsView
         reservations={CurrentUserTrips}
         currentUser={currentUser}

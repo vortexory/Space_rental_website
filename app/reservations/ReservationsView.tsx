@@ -46,6 +46,7 @@ const ReservationsView = ({
 
   return (
     <Container>
+      <div className="h-4" />
       <Heading
         title="Reservations"
         subtitle="Bookings on your properties"
