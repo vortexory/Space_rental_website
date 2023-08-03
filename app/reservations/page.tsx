@@ -14,14 +14,13 @@ const ReservationsPage = async () => {
   if (!currentUser) {
     return (
       <ClientOnly>
-        <EmptyState
-          title="Unauthorized"
-          subtitle="Please login"
-        />
+          <EmptyState
+            title="Unauthorized"
+            subtitle="Please login"
+          />
       </ClientOnly>
     );
   }
-
 
   //current user listings that have been reserved by others
   const reservations = await getReservations({ authorId: currentUser.id });
