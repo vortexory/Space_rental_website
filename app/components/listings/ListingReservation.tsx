@@ -42,15 +42,12 @@ const ListingReservation: React.FC<ListingReservationProps> = ({
         <div className="font-light text-neutral-600">night</div>
       </div>
       <hr />
-      {/* <div className=" w-full"> */}
-        {/* <div className='mx-auto max-w-max min-w-max'> */}
+     
           <DatePicker
             value={dateRange}
             disabledDates={disabledDates}
             onChange={(value) => onChangeDate(value.selection)}
           />
-        {/* </div> */}
-      {/* </div> */}
       <hr />
       <div className="p-4">
         <Button
