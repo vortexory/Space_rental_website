@@ -38,13 +38,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   return (
     <div className="relative ">
       <div className="flex flex-row items-center gap-3">
-        <div
-          className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer
-        "
-          onClick={onRent}
-        >
-          Home
-        </div>
+       
         <div
           onClick={toggleOpen}
           className="md:py-1 md: px-2 border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer  shadow-sm hover:shadow-md transition"

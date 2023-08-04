@@ -11,6 +11,7 @@ import ClientOnly from './components/ClientOnly';
 import ToasterProvider from './providers/ToasterProvider';
 
 import getCurrentUser from './actions/getCurrentUser';
+import SearchModal from './components/modals/SearchModal';
 
 export const metadata = {
   title: 'Space',
@@ -32,6 +33,7 @@ export default async function RootLayout({
         <ClientOnly>
           <ToasterProvider />
           <Navbar currentUser={currentUser} />
+          <SearchModal />
           <RegisterModal />
           <LoginModal />
           <RentModal />

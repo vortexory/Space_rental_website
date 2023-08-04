@@ -6,7 +6,7 @@ import useCountries, { FormattedCountry } from '@/app/hooks/useCountries';
 import { FlagIcon } from 'react-flag-kit';
 import { locationType } from '../modals/RentModal/RentModal';
 
-interface CountrySelectProps {
+export interface CountrySelectProps {
   value?: locationType | null;
   onChange: (value: FormattedCountry) => void;
 }
