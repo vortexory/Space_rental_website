@@ -6,15 +6,7 @@ import React from 'react';
 import SingleListingView from './SingleListingView';
 import { getUserFavorites } from '@/app/actions/getUserFavorites';
 import getReservations from '@/app/actions/getReservation';
-import getListings from '@/app/actions/getListings';
 
-export async function generateStaticParams() {
-  const listings = await getListings({})
- 
-  return listings.map((listing) => ({
-    listingId: listing.id,
-  }))
-}
 
 const SingleListing = async ({ params }: { params: { listingId: string } }) => {
   const { listingId } = params;
