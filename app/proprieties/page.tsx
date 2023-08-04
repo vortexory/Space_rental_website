@@ -6,7 +6,7 @@ import { getUserFavorites } from '@/app/actions/getUserFavorites';
 import ProprietiesView from './ProprietiesView';
 import getListings from '../actions/getListings';
 
-const SingleListing = async ({ params }: { params: { listingId: string } }) => {
+const PrprietiesPage = async () => {
   const currentUser = await getCurrentUser();
 
 
@@ -44,4 +44,4 @@ const SingleListing = async ({ params }: { params: { listingId: string } }) => {
   );
 };
 
-export default SingleListing;
+export default PrprietiesPage;
