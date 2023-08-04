@@ -16,7 +16,6 @@ const Home = async ({ searchParams }: HomeProps) => {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
   const favorites = await getUserFavorites(currentUser?.id);
-
   if (!listings.length) {
     return (
       <ClientOnly>

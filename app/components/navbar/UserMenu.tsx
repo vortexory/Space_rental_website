@@ -50,7 +50,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl shadow-md md:w-full bg-white overflow-hidden right-0 top-12 text-sm ">
+        <div className="absolute rounded-xl shadow-md md:w-full- w-[10rem] bg-white overflow-hidden right-0 top-12 text-sm ">
           <div
             className="flex flex-col cursor-pointer"
             onClick={() => setIsOpen(false)}
