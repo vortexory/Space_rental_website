@@ -3,8 +3,8 @@ import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import React from 'react';
 import { getUserFavorites } from '@/app/actions/getUserFavorites';
-import ProprietiesView from './ProprietiesView';
 import getListings from '../actions/getListings';
+import PropertiesView from './PropertiesView';
 
 const PrprietiesPage = async () => {
   const currentUser = await getCurrentUser();
@@ -18,10 +18,10 @@ const PrprietiesPage = async () => {
   }
 
 
-  const proprieties = await getListings({ userId: currentUser.id });
+  const properties = await getListings({ userId: currentUser.id });
   const favorites = await getUserFavorites(currentUser.id);
 
-  if (proprieties.length===0) {
+  if (properties.length===0) {
     return (
       <ClientOnly>
         <EmptyState
@@ -35,8 +35,8 @@ const PrprietiesPage = async () => {
   return (
     <ClientOnly>
       <div className="h-4" />
-      <ProprietiesView
-        listings={proprieties}
+      <PropertiesView
+        listings={properties}
         currentUser={currentUser}
         favorites={favorites}
       />
