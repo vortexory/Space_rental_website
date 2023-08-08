@@ -13,6 +13,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import ListingReservation from '@/app/components/listings/ListingReservation';
 import { Range } from 'react-date-range';
+import { BASE_URL } from '@/lib/constants';
 
 interface SingleListingViewProps {
   listing: Listing & {
@@ -64,7 +65,7 @@ const SingleListingView = ({
     setIsLoading(true);
 
     axios
-      .post('/api/reservations', {
+      .post(`${BASE_URL}/api/reservations`, {
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,

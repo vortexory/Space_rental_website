@@ -8,9 +8,6 @@ import bcrypt from 'bcrypt';
 import prisma from './prisma';
 
 export const authOptions: NextAuthOptions = {
-  // session: {
-  //   strategy: 'jwt',
-  // },
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     CredentialsProvider({

@@ -9,6 +9,7 @@ import Heading from '@/app/components/Heading';
 import Container from '@/app/components/Container';
 import ListingCard from '@/app/components/listings/ListingCard';
 import { Favorite, Listing, User } from '@prisma/client';
+import { BASE_URL } from '@/lib/constants';
 
 interface ProprietiesViewProps {
   listings: Listing[];
@@ -29,7 +30,7 @@ const ProprietiesView = ({
       setDeletingId(id);
 
       axios
-        .delete(`/api/listings/${id}`)
+        .delete(`${BASE_URL}/api/listings/${id}`)
         .then(() => {
           toast.success('Propriety deleted');
           router.refresh();

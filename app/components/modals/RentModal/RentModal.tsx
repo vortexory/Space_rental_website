@@ -18,6 +18,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { isUndefined } from 'util';
+import { BASE_URL } from '@/lib/constants';
 
 enum STEPS {
   CATEGORY = 0,
@@ -147,7 +148,7 @@ const RentModal = () => {
     toast.loading('Loading...', { id: '1' });
 
     axios
-      .post('/api/listings', data)
+      .post(`${BASE_URL}/api/listings`, data)
       .then(() => {
         toast.success('Listing created!', { id: '1' });
         router.refresh();

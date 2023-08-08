@@ -4,6 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import useLoginModal from './useLoginModal';
 import { Favorite, User } from '@prisma/client';
+import { BASE_URL } from '@/lib/constants';
 
 interface UseFavoriteProps {
   listingId: string;
@@ -32,11 +33,11 @@ const useFavorite = ({ listingId, currentUser, favorites }: UseFavoriteProps) =>
 
       try {
         if (hasFavorited) {
-          await axios.delete(`/api/favorites/${listingId}`);
+          await axios.delete(`${BASE_URL}/api/favorites/${listingId}`);
           router.refresh();
           toast.success('Removed from Favorites');
         } else {
-          await axios.post(`/api/favorites/${listingId}`);
+          await axios.post(`${BASE_URL}/api/favorites/${listingId}`);
           router.refresh();
           toast.success('Added to Favorites');
         }

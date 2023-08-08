@@ -1,4 +1,3 @@
-import getCurrentUser from '@/app/actions/getCurrentUser';
 import prisma from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 

@@ -19,6 +19,7 @@ import axios from 'axios';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { BASE_URL } from '@/lib/constants';
 
 // Define Zod schema for form validation
 const schema = z.object({
@@ -60,7 +61,7 @@ const RegisterModal = () => {
     toast.loading('Sending Request ', { id: '1' });
 
     try {
-      await axios.post('/api/register', data);
+      await axios.post(`${BASE_URL}/api/register`, data);
       await signIn('credentials', {
         email: data.email,
         password: data.password,

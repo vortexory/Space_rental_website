@@ -9,6 +9,7 @@ import Heading from '@/app/components/Heading';
 import Container from '@/app/components/Container';
 import ListingCard from '@/app/components/listings/ListingCard';
 import { Favorite, Reservation, User } from '@prisma/client';
+import { BASE_URL } from '@/lib/constants';
 
 interface SingleTripeViewProps {
   reservations: Reservation[];
@@ -29,7 +30,7 @@ const ReservationsView = ({
       setDeletingId(id);
 
       axios
-        .delete(`/api/reservations/${id}`)
+        .delete(`${BASE_URL}/api/reservations/${id}`)
         .then(() => {
           toast.success('Reservation cancelled');
           router.refresh();
