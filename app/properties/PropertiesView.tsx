@@ -33,7 +33,7 @@ const PropertiesView = ({
         .delete(`${BASE_URL}/api/listings/${id}`)
         .then(() => {
           toast.success('Property deleted');
-          router.push('/properties');
+          router.refresh()
         })
         .catch((error) => {
           toast.error(`Something went wrong: ${error?.response?.data?.error}`);
