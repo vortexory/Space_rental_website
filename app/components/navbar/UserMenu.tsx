@@ -51,9 +51,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         >
           <AiOutlineMenu />
           <div>
-            <Avatar
-              src={currentUser?.image ? currentUser.image : '/images/user.png '}
-            />
+            {currentUser?.image ? (
+              <Avatar src={currentUser.image} />
+            ) : (
+              <Avatar src="/images/user.png " />
+            )}
           </div>
         </div>
       </div>
