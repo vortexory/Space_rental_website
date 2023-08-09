@@ -3,9 +3,9 @@ import ClientOnly from '@/app/components/ClientOnly';
 
 import getCurrentUser from '@/app/actions/getCurrentUser';
 
-import TripsView from './TripsView';
 import getReservations from '../actions/getReservation';
 import { getUserFavorites } from '../actions/getUserFavorites';
+import TripsView from '../components/TripsView';
 
 const TripsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -25,7 +25,7 @@ const TripsPage = async () => {
   //to get trips that the current user have reserved
   const CurrentUserTrips = await getReservations({ userId: currentUser.id });
 
-  if (CurrentUserTrips.length === 0) {
+  if (!CurrentUserTrips || CurrentUserTrips.length === 0) {
     return (
       <ClientOnly>
         <EmptyState

@@ -38,7 +38,7 @@ export default async function RootLayout({
           <LoginModal />
           <RentModal />
         </ClientOnly>
-        <div className="flex flex-row min-h-screen ">
+        <div className="flex flex-row ">
           <ClientOnly>
             <Sidebar />
           </ClientOnly>

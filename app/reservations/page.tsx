@@ -5,7 +5,7 @@ import getCurrentUser from '@/app/actions/getCurrentUser';
 
 import getReservations from '../actions/getReservation';
 import { getUserFavorites } from '../actions/getUserFavorites';
-import ReservationsView from './ReservationsView';
+import ReservationsView from '../components/ReservationsView';
 
 const ReservationsPage = async () => {
   const currentUser = await getCurrentUser();

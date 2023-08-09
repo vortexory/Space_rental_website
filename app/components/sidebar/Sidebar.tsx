@@ -19,7 +19,9 @@ const Sidebar = () => {
       className="
         fixed
         flex flex-col 
-        h-full shadow-md
+        max-h-screen shadow-md
+        overflow-scroll
+        scroll-smooth
         "
     >
       {Object.entries(categories).map(([label, { icon }]) => (
