@@ -25,7 +25,7 @@ const TripsPage = async () => {
   //to get trips that the current user have reserved
   const CurrentUserTrips = await getReservations({ userId: currentUser.id });
 
-  if (CurrentUserTrips.length === 0) {
+  if (!CurrentUserTrips || CurrentUserTrips.length === 0) {
     return (
       <ClientOnly>
         <EmptyState
