@@ -41,9 +41,9 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         <div
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer
         "
-          onClick={onOpenRent}
+          onClick={onRent}
         >
-          Your Home
+          Add a property
         </div>
         <div
           onClick={toggleOpen}
@@ -51,7 +51,9 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         >
           <AiOutlineMenu />
           <div>
-            <Avatar src={currentUser?.image} />
+            <Avatar
+              src={currentUser?.image ? currentUser.image : '/images/user.png '}
+            />
           </div>
         </div>
       </div>
@@ -64,12 +66,8 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             {currentUser ? (
               <>
                 <MenuItem
-                  onClick={onOpenRent}
-                  label="Home"
-                />
-                <MenuItem
-                  onClick={() => router.push('/proprieties')}
-                  label="My Proprieties"
+                  onClick={() => router.push('/properties')}
+                  label="My Properties"
                 />
                 <MenuItem
                   onClick={() => router.push('/favorites')}

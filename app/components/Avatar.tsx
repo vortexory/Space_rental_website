@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 
 interface AvatarProps {
-  src: string | null | undefined
+  src: string  ;
 }
 const Avatar = ({ src }: AvatarProps) => {
   return (
@@ -12,7 +12,7 @@ const Avatar = ({ src }: AvatarProps) => {
       height={30}
       width={30}
       alt="Avatar"
-      src={src || '/images/user.png '}
+      src={src}
     />
   );
 };

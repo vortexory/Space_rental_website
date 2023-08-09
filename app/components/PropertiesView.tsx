@@ -11,17 +11,17 @@ import ListingCard from '@/app/components/listings/ListingCard';
 import { Favorite, Listing, User } from '@prisma/client';
 import { BASE_URL } from '@/lib/constants';
 
-interface ProprietiesViewProps {
+interface PropertiesViewProps {
   listings: Listing[];
   currentUser?: User | null;
   favorites: Favorite[];
 }
 
-const ProprietiesView = ({
+const PropertiesView = ({
   currentUser,
   listings,
   favorites,
-}: ProprietiesViewProps) => {
+}: PropertiesViewProps) => {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState('');
 
@@ -32,8 +32,8 @@ const ProprietiesView = ({
       axios
         .delete(`${BASE_URL}/api/listings/${id}`)
         .then(() => {
-          toast.success('Propriety deleted');
-          router.refresh();
+          toast.success('Property deleted');
+          router.refresh()
         })
         .catch((error) => {
           toast.error(`Something went wrong: ${error?.response?.data?.error}`);
@@ -69,4 +69,4 @@ const ProprietiesView = ({
   );
 };
 
-export default ProprietiesView;
+export default PropertiesView;

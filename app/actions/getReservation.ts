@@ -1,3 +1,5 @@
+import prisma from "@/lib/prisma";
+
 interface IParams {
   listingId?: string;
   userId?: string;

@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image';
 
 import useCountries from '@/app/hooks/useCountries';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 import Button from '../Button';
 import { useCallback, useMemo } from 'react';
 import { differenceInCalendarDays, format } from 'date-fns';
+import { useRouter } from 'next/navigation';
 
 interface ListingCardProps {
   data: Listing;
@@ -31,7 +33,7 @@ const ListingCard = ({
   reservation,
 }: ListingCardProps) => {
   const { getByValue } = useCountries();
-
+  const router = useRouter();
   const location = getByValue(data.locationValue);
 
   const handleCancel = useCallback(
@@ -81,8 +83,8 @@ const ListingCard = ({
   }, [reservation]);
 
   return (
-    <Link
-      href={`/listings/${data.id}`}
+    <div
+      onClick={() => router.push(`/listings/${data.id}`)}
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full">
@@ -114,12 +116,12 @@ const ListingCard = ({
             <div className="font-light text-sm">{` - ${
               reservation
                 ? //@ts-ignore
-                  (dayCount === 0
-                    ? '1 day'
-                    : //@ts-ignore
-                    dayCount > 1
-                    ? dayCount + ' nights'
-                    : dayCount + ' night')
+                  dayCount === 0
+                  ? '1 day'
+                  : //@ts-ignore
+                  dayCount > 1
+                  ? dayCount + ' nights'
+                  : dayCount + ' night'
                 : 'per night'
             }`}</div>
           </div>
@@ -133,7 +135,7 @@ const ListingCard = ({
           )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

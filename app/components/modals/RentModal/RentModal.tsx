@@ -2,13 +2,10 @@
 import React, { useMemo, useState } from 'react';
 import Modal from '../Modal';
 import useRentModal from '@/app/hooks/useRentModal';
-import Heading from '../../Heading';
-import { categories } from '@/data/categories';
-import CategoryInput from '../../Input/CategoryInput';
+
 import { z } from 'zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import CountrySelect from '../../Input/CountrySelect';
-import dynamic from 'next/dynamic';
+
 import CategoryBody from './CategoryBody';
 import LocationBody from './LocationBody';
 import InfoBody from './InfoBody';
@@ -17,7 +14,6 @@ import DescriptionBody from './DescriptionBody';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { isUndefined } from 'util';
 import { BASE_URL } from '@/lib/constants';
 
 enum STEPS {
@@ -143,6 +139,7 @@ const RentModal = () => {
 
       return;
     }
+    toast.custom('You should signin first');
 
     setIsLoading(true);
     toast.loading('Loading...', { id: '1' });
