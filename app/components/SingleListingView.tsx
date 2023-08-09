@@ -3,7 +3,7 @@
 import Container from '@/app/components/Container';
 
 import { Favorite, Listing, User } from '@prisma/client';
-import ListingHead from '../../components/listings/ListingHead';
+import ListingHead from './listings/ListingHead';
 import ListingInfo from '@/app/components/listings/ListingInfo';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';

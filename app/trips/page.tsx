@@ -3,9 +3,9 @@ import ClientOnly from '@/app/components/ClientOnly';
 
 import getCurrentUser from '@/app/actions/getCurrentUser';
 
-import TripsView from './TripsView';
 import getReservations from '../actions/getReservation';
 import { getUserFavorites } from '../actions/getUserFavorites';
+import TripsView from '../components/TripsView';
 
 const TripsPage = async () => {
   const currentUser = await getCurrentUser();

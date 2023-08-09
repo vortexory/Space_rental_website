@@ -4,7 +4,7 @@ import EmptyState from '@/app/components/EmptyState';
 import React from 'react';
 import { getUserFavorites } from '@/app/actions/getUserFavorites';
 import getListings from '../actions/getListings';
-import PropertiesView from './PropertiesView';
+import PropertiesView from '../components/PropertiesView';
 
 const PrprietiesPage = async () => {
   const currentUser = await getCurrentUser();
