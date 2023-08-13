@@ -2,6 +2,8 @@
 
 This Property Rental Application is designed to provide a comprehensive solution for property management and reservations. The application encompasses a wide range of features, ensuring a seamless experience for property owners and guests alike.
 
+![space](https://github.com/idrissi-hamza/space/assets/97639117/f4d8dea5-a68e-4a50-b6f6-c9d27fb18cdd)
+
 ## Features Overview
 
 - **Tailwind Design:** The application boasts a sleek and modern UI design crafted using the Tailwind CSS framework.
