@@ -54,7 +54,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
             {currentUser?.image ? (
               <Avatar src={currentUser.image} />
             ) : (
-              <Avatar src="/images/user.png " />
+              <Avatar src="/user.svg" />
             )}
           </div>
         </div>
